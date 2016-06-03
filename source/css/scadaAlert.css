@@ -1,0 +1,79 @@
+.alert-km-all {
+/*    position: absolute;*/
+    position: fixed;
+    width: 95%;
+    text-align: center;
+    z-index: 9999;
+    font-weight: normal;
+    font-size: 1.6em;
+    letter-spacing: 0.1em;
+    font-family: "Arial";
+    padding: 0.5em;
+    margin: auto;
+    border-radius: 0.5em;
+    left: 0;
+    right: 0;
+}
+
+.alert-km-title {
+    font-weight: bold;
+    letter-spacing: 0.3em;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+    text-decoration: underline;
+    position: relative;
+}
+
+.alert-km-paragraph {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    position: relative;
+}
+
+.alert-km-alarm {
+    background-color: darkred;
+    color: white;
+    border: 0.1em solid;
+    border-color: red;
+    opacity: 0.8;
+}
+
+.alert-km-warning {
+    background-color: darkorange;
+    color: black;
+    border: 0.1em solid;
+    border-color: yellow;
+    opacity: 0.8;
+}
+
+.alert-km-info {
+    background-color: #504d4d;
+    color: white;
+    border: 1px solid;
+    border-color: whitesmoke;
+    opacity: 0.8;
+}
+
+.alert-km-ok {
+    background-color: green;
+    color: white;
+    border: 0.1em solid;
+    border-color: lime;
+    opacity: 0.8;
+}
+
+.alert-km-testCustomCss {
+    background-color: hotpink;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 1.8em;
+    border: 0.2em groove;
+    border-color: deeppink;
+    opacity: 0.6;
+}
