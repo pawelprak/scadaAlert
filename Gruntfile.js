@@ -55,6 +55,18 @@ module.exports = function (grunt) {
             }
         },
 
+        compress: {
+            main: {
+                options: {
+                    archive: 'scadaAlert.zip'
+                },
+                expand: true,
+                cwd: 'build/',
+                src: ['**/*'],
+                dest: 'scadaAlert/'
+            }
+        },
+
         watch: {
             options: {
                 nospawn: true
@@ -72,12 +84,13 @@ module.exports = function (grunt) {
     });
 
 
-    
+
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-compress');
 
 
 

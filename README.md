@@ -2,8 +2,9 @@
 
 
 ### Description  
-
+Simple alert pop-up window written in pure javascript.  
 
 ### Examples  
-[**link**](http://pawelprak.github.io/ )  
+Check out examples page:
+[**Examples**](http://pawelprak.github.io/scadaAlert/)  
  
