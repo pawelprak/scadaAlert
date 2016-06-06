@@ -4,15 +4,9 @@
 module.exports = function (grunt) {
     'use strict';
 
-    var date = '/*! Build date: <%= grunt.template.today() %> */\n';
-
     grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
 
-        clean: {
-            build: {
-                src: ['build']
-            }
-        },
 
         copy: {
             js: {
@@ -35,7 +29,11 @@ module.exports = function (grunt) {
             options: {
                 mangle: true,
                 sourceMap: true,
-                banner: date
+                banner: '/*! \n<%= pkg.name %> <%= pkg.version %> \n\n' +
+                    'Build date: <%= grunt.template.today() %> \n' +
+                    'License: <%= pkg.license %> \n' +
+                    'Author: <%= pkg.author.name %> \n' +
+                    'Repository: <%= pkg.repository.url %> \n*/'
             },
             build: {
                 files: {
@@ -85,7 +83,6 @@ module.exports = function (grunt) {
 
 
 
-    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');

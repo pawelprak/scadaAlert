@@ -35,7 +35,7 @@
     'use strict';
 
 
-    function AlertKM(config) { // To jest konstruktor klasy
+    function AlertKM(config) { // Class constructor
         if (!(this instanceof AlertKM)) {
             throw new TypeError("*** AlertKM *** Constructor cannot be called as a function. Use 'new' keyword");
         }
@@ -47,25 +47,25 @@
             console.log('*** AlertKM *** No id!');
             return false;
         }
-        if (document.getElementById(config.id) !== null) { // zapobieganie zmianie parametrów istniejącego elementu
+        if (document.getElementById(config.id) !== null) { // avoid changing parameters of existing instance
             throw new Error('*** AlertKM *** Element with ID: ' + config.id + ' already exists!');
         }
 
         // Class public properties
         this.id = config.id;
-        this.type = config.type || 'alarm'; // typ okienka: alarm / warning / info / ok
-        this.css = config.css || null; // klasa css dostarczona przez użytkownika. Jeśli podana - będzie wczytywana na końcu (nadpisze wszystkie inne style)
-        this.title = config.title || null; // tytuł okienka, pogrubiony i zwiększony tekst
-        this.texts = config.texts || null; // tabela z kolejnymi linijkami tekstu
-        this.position = config.position || 'bottom'; // Pozycja okienka: bottom / top / center
-        this.html = config.html || null; // dodanie całego fragmentu html
+        this.type = config.type || 'alarm'; // avaible types: alarm / warning / info / ok
+        this.css = config.css || null; // user css class. It will be loaded at the end (overwrites previous css classes)
+        this.title = config.title || null;
+        this.texts = config.texts || null;
+        this.position = config.position || 'bottom'; // avaible positions: bottom / top / center
+        this.html = config.html || null; // user html fragment
 
-        this.timeVisible = config.timeVisible || null; // czas przez jaki ma być widoczne okienko
-        this.timeCyclic = config.timeCyclic || null; // czas co jaki okres czasu ma się ponownioe pojawiać okienko z powiadomieniem
+        this.timeVisible = config.timeVisible || null; // alert will be visible for this amount of time...
+        this.timeCyclic = config.timeCyclic || null; // ... and will show up every 'timeCyclic'
 
         this.backgroundColor = config.backgroundColor || null;
         this.borderColor = config.borderColor || null;
-        this.padding = config.padding || null; // podawać w em
+        this.padding = config.padding || null; // em
         this.opacity = config.opacity || null;
         this.width = config.width || null;
         this.height = config.height || null;
@@ -170,16 +170,16 @@
 
         constructor: AlertKM,
 
-        // METODY PUBLICZNE 
+        // PUBLIC METHODS 
         render: function () {
             var i,
                 div;
 
-            // stworzenie kontenera głównego
+            // create main container
             this._div = document.createElement("div");
             this._div.setAttribute("id", this.id);
 
-            // dodanie klas definiujących odpowiednie typy komunikatów
+            // add proper css class
             this._div.classList.add("alert-km-all");
             switch (this.type) {
             case 'alarm':
@@ -198,24 +198,24 @@
                 console.log('*** AlertKM *** Unknown type! Choose for example: warning');
             }
 
-            // dodanie klasy ze stylami użytkownika
+            // add user css class
             if (this.css !== null) {
                 this._div.classList.add(this.css);
             }
 
-            // dodanie tytułu
+            // add title
             if (this.title !== null) {
                 this._createParagraph(this.title, 'tytul');
             }
 
-            // dodanie tekstów
+            // add texts
             if (this.texts !== null) {
                 for (i = 0; i < this.texts.length; i += 1) {
                     this._createParagraph(this.texts[i]);
                 }
             }
 
-            // dodatkowe reguły css użytkownika
+            // few more extra parameters
             if (this.backgroundColor !== null) {
                 this._div.style.backgroundColor = this.backgroundColor;
             }
@@ -223,14 +223,14 @@
                 this._div.style.borderColor = this.borderColor;
             }
             if (this.padding !== null) {
-                this._div.style.padding = this.padding + ' 0 ' + this.padding + ' 0 '; // tylko góra i dół
+                this._div.style.padding = this.padding + ' 0 ' + this.padding + ' 0 '; // only up and down
             }
             if (this.opacity !== null) {
                 this._div.style.opacity = this.opacity;
             }
             if (this.width !== null) {
-                if (AlertKM.WINDOW_WIDTH < 500) { // wielkość ramki w zależności od typu wyświetlacza
-                    this._div.style.width = '95%'; // beagle na ktw na pełną szerokość
+                if (AlertKM.WINDOW_WIDTH < 500) { // below 500px add full width
+                    this._div.style.width = '95%';
                 } else {
                     this._div.style.width = this.width;
                 }
@@ -242,13 +242,13 @@
                 this._div.style.fontSize = this.fontSize;
             }
 
-            // dodanie pełnych elementów html 
+            // add user html
             if (this.html !== null) {
                 this._div.appendChild(this.html);
             }
 
             // dodanie elementu do html
-            this._div.style.visibility = 'visible'; // potrzebne do obsługi metod show/hide
+            this._div.style.visibility = 'visible'; // it is needed for show/hide methods
             document.body.appendChild(this._div);
 
             // vertical allign of <p> elements
